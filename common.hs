@@ -73,4 +73,30 @@ map' :: (a -> b) -> [a] -> [b]
 map' _ [] = []
 map' f (x:xs) = f x : map' f xs
 
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' _ [] = []
+filter' f (x:xs)
+    | f x = x : rest
+    | otherwise = rest
+    where rest = filter' f xs
+
+intersperse' :: a -> [a] -> [a]
+intersperse' _ [] = []
+intersperse' a [xs] = [xs]
+intersperse' a (x:xs) = x : a : intersperse' a xs
+
+reverse' :: [a] -> [a]
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
+
+concat' :: [[a]] -> [a]
+concat' [] = []
+concat' (x:xs) = x ++ concat' xs
+
+intercalate' :: [a] -> [[a]] -> [a]
+intercalate' _ [] = []
+intercalate' [] xs = concat' xs
+intercalate' x ys = concat' $ intersperse' x ys
+
+
 
