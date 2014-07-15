@@ -159,3 +159,10 @@ dropWhile' _ [] = []
 dropWhile' f all@(x:xs)
     | f x = dropWhile' f xs
     | otherwise = all
+
+span' :: (a -> Bool) -> [a] -> ([a], [a])
+span' _ [] = ([], [])
+span' f xs = ([takeWhile' f xs], [dropWhile' f xs])
+    
+
+
