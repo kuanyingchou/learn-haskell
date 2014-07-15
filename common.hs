@@ -153,3 +153,9 @@ takeWhile' _ [] = []
 takeWhile' f (x:xs) 
     | f x = x : takeWhile' f xs
     | otherwise = []
+
+dropWhile' :: (a -> Bool) -> [a] -> [a]
+dropWhile' _ [] = []
+dropWhile' f all@(x:xs)
+    | f x = dropWhile' f xs
+    | otherwise = all
