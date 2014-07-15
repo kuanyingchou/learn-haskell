@@ -135,5 +135,7 @@ all' f (x:xs)
     | not (f x) = False
     | otherwise = all' f xs
 
+iterate' :: (a -> a) -> a -> [a]
+iterate' f x = x : iterate' f (f x)
 
 
