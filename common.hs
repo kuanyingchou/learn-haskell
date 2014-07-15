@@ -138,4 +138,13 @@ all' f (x:xs)
 iterate' :: (a -> a) -> a -> [a]
 iterate' f x = x : iterate' f (f x)
 
+-- is there sth similar in the standard lib?
+takeFrom' :: Integer -> [a] -> [a]
+takeFrom' _ [] = []
+takeFrom' x all@(y:ys)
+    | x > 0 = takeFrom' (x-1) ys
+    | otherwise = all
+
+splitAt' :: Integer -> [a] -> ([a], [a])
+splitAt' i xs = (take' i xs, takeFrom' i xs)
 
