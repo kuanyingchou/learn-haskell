@@ -111,5 +111,15 @@ concatMap' :: (a -> [a]) -> [a] -> [a]
 concatMap' _ [] = []
 concatMap' f xs = concat' $ map f xs
 
+and' :: [Bool] -> Bool
+and' [] = True
+and' (x:xs) 
+    | x = and' xs
+    | otherwise = False
 
+or' :: [Bool] -> Bool
+or' [] = False
+or' (x:xs) 
+    | x = True
+    | otherwise = or' xs
 
