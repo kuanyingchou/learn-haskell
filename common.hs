@@ -14,7 +14,7 @@ init' (x:xs) = x : init' xs
 last' :: [a] -> a
 last' [] = error "empty list"
 last' [x] = x
-last' (x:xs) = last' xs
+last' (_:xs) = last' xs
 
 take' :: Integer -> [a] -> [a]
 take' _ [] = []
@@ -87,7 +87,7 @@ intersperse' a (x:xs) = x : a : intersperse' a xs
 
 reverse' :: [a] -> [a]
 reverse' [] = []
-reverse' (x:xs) = reverse' xs ++ [x]
+reverse' xs = last xs : reverse' (init xs) -- reverse' xs ++ [x]
 
 concat' :: [[a]] -> [a]
 concat' [] = []
@@ -98,5 +98,13 @@ intercalate' _ [] = []
 intercalate' [] xs = concat' xs
 intercalate' x ys = concat' $ intersperse' x ys
 
+-- [[1, 2, 3], [4, 5, 6]]
+-- =>
+-- [[1, 4], [2, 5], [3, 6]]
+
+transpose' :: [[a]] -> [[a]]
+transpose' [] = []
+transpose' all@(x:xs) = 
+        [[x !! (fromIntegral i) | x <- all ] | i <- [0..(length' x)-1] ]
 
 
