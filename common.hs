@@ -107,4 +107,9 @@ transpose' [] = []
 transpose' all@(x:xs) = 
         [[x !! (fromIntegral i) | x <- all ] | i <- [0..(length' x)-1] ]
 
+concatMap' :: (a -> [a]) -> [a] -> [a]
+concatMap' _ [] = []
+concatMap' f xs = concat' $ map f xs
+
+
 
