@@ -148,3 +148,8 @@ takeFrom' x all@(y:ys)
 splitAt' :: Integer -> [a] -> ([a], [a])
 splitAt' i xs = (take' i xs, takeFrom' i xs)
 
+takeWhile' :: (a -> Bool) -> [a] -> [a]
+takeWhile' _ [] = []
+takeWhile' f (x:xs) 
+    | f x = x : takeWhile' f xs
+    | otherwise = []
