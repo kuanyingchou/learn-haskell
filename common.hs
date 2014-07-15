@@ -123,3 +123,17 @@ or' (x:xs)
     | x = True
     | otherwise = or' xs
 
+any' :: (a -> Bool) -> [a] -> Bool
+any' _ [] = False
+any' f (x:xs) 
+    | f x = True
+    | otherwise = any' f xs
+
+all' :: (a -> Bool) -> [a] -> Bool
+all' _ [] = True
+all' f (x:xs) 
+    | not (f x) = False
+    | otherwise = all' f xs
+
+
+
