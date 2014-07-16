@@ -167,3 +167,20 @@ span' f xs = (takeWhile' f xs, dropWhile' f xs)
 break' :: (a -> Bool) -> [a] -> ([a], [a])
 break' f xs = span' (not . f) xs
 
+-- fold' (+) 0 [1..3]
+-- = 0 + 1 + 2 + 3 = 6
+foldl' :: (a -> a -> a) -> a -> [a] -> a
+foldl' _ a [] = a
+foldl' f a (x:xs) = foldl' f (f a x) xs
+
+foldl1' :: (a -> a -> a) -> [a] -> a
+foldl1' _ [] = error "empty list"
+foldl1' f (x:xs) = foldl' f x xs
+
+foldr' :: (a -> a -> a) -> a -> [a] -> a
+foldr' f a xs = foldl1' (flip' f) rev
+    where rev = a : (reverse' xs)
+
+foldr1' :: (a -> a -> a) -> [a] -> a
+foldr1' f xs = foldr' f (last xs) (init xs)
+
