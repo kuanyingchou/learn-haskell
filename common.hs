@@ -39,10 +39,6 @@ length' :: [a] -> Integer
 length' [] = 0
 length' (x:xs) = 1 + length' xs
 
-null' :: [a] -> Bool
-null' [] = True
-null' xs = False
-
 min' :: (Ord a) => a -> a -> a
 min' x y = if x <= y then x else y
 
@@ -52,12 +48,14 @@ max' x y = if x >= y then x else y
 succ' :: Integer -> Integer
 succ' i = i + 1
 
+quicksort' :: (Ord a) => [a] -> [a]
+quicksort' [] = []
+quicksort' (x:xs) = smaller ++ [x] ++ larger
+                   where smaller = quicksort' [e | e <- xs, e <= x]
+                         larger  = quicksort' [e | e <- xs, e > x]
+
 sort' :: (Ord a) => [a] -> [a]
-sort' [] = []
-sort' [x] = [x]
-sort' (x:xs) = (sort' left) ++ [x] ++ (sort' right)
-    where left = [e | e<-xs, e<=x]
-          right = [e | e<-xs, e>x]
+sort' = quicksort'
 
 zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
 zipWith' _ _ [] = []
@@ -183,4 +181,10 @@ foldr' f a xs = foldl1' (flip' f) rev
 
 foldr1' :: (a -> a -> a) -> [a] -> a
 foldr1' f xs = foldr' f (last xs) (init xs)
+
+null' :: [a] -> Bool
+-- null' xs = if length' xs == 0 then True else False
+null' xs    
+    | length' xs == 0 = True
+    | otherwise = False
 
