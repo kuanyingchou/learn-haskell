@@ -184,3 +184,11 @@ foldr' f a xs = foldl1' (flip' f) rev
 foldr1' :: (a -> a -> a) -> [a] -> a
 foldr1' f xs = foldr' f (last xs) (init xs)
 
+-- how to save previous value?
+-- how to combine revious results?
+group' :: (Eq a) => [a] -> [[a]]
+group' [] = []
+group' (x:xs) = (x:first) : (group' rest)
+    where (first, rest) = span' (==x) xs
+    
+    
