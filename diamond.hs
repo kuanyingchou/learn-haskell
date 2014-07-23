@@ -1,5 +1,7 @@
 -- 2014.6.18  ken  initial version
 
+main = printDiamond $ diamond 7 '*'
+
 center :: Int -> String -> String
 center n str = ws ++ str ++ ws
     where wsLen = (n - length str) `div` 2 
