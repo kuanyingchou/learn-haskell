@@ -77,5 +77,9 @@ myPack [] = [] -- [] is a [[a]]
 myPack all@(x:xs) = first : myPack rest
         where (first, rest) = break (/=x) all
 
+-- p10
+myEncode :: (Eq a) => [a] -> [(Int, a)]
+myEncode [] = []
+myEncode xs = [(length x, head x)| x<-(myPack xs)]
 
 
