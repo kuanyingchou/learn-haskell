@@ -62,4 +62,20 @@ zip' (_, []) = []
 zip' (x:xs, y:ys) = (x, y) : zip' (xs, ys)
 -}
 
+-- p8
+myCompress :: (Eq a) => [a] -> [a]
+myCompress [] = []
+myCompress [x] = [x]
+myCompress (x:y:xs) 
+    | x == y = rest
+    | otherwise = x : rest 
+    where rest = myCompress (y:xs)
+
+-- p9
+myPack :: (Eq a) => [a] -> [[a]]
+myPack [] = [] -- [] is a [[a]]
+myPack all@(x:xs) = first : myPack rest
+        where (first, rest) = break (/=x) all
+
+
 
