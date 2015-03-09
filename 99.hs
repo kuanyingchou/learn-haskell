@@ -88,3 +88,9 @@ myEncode' :: (Eq a) => [a] -> [Entry a]
 myEncode' [] = []
 myEncode' xs = [if len == 1 then Single fir else Multiple len fir 
     | x<-(myPack xs), let len = length x, let fir = head x]
+
+-- p12
+myDecode' :: [Entry a] -> [a]
+myDecode' [] = []
+myDecode' ((Single a):xs) = a : myDecode' xs
+myDecode' ((Multiple b c):xs) = (replicate b c) ++ myDecode' xs    
