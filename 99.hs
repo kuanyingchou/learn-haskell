@@ -46,7 +46,7 @@ myIsPalindrome xs
         | otherwise = False
     same [] [] = True
 
--- p7
+-- p7 !
 data NestedList a = Elem a | List [NestedList a]
 
 myFlatten :: NestedList a -> [a]
@@ -82,4 +82,9 @@ myEncode :: (Eq a) => [a] -> [(Int, a)]
 myEncode [] = []
 myEncode xs = [(length x, head x)| x<-(myPack xs)]
 
-
+-- p11
+data Entry a = Single a | Multiple Int a deriving Show
+myEncode' :: (Eq a) => [a] -> [Entry a]
+myEncode' [] = []
+myEncode' xs = [if len == 1 then Single fir else Multiple len fir 
+    | x<-(myPack xs), let len = length x, let fir = head x]
