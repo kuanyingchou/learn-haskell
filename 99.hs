@@ -94,3 +94,25 @@ myDecode' :: [Entry a] -> [a]
 myDecode' [] = []
 myDecode' ((Single a):xs) = a : myDecode' xs
 myDecode' ((Multiple b c):xs) = (replicate b c) ++ myDecode' xs    
+
+-- p13
+getValue :: Entry a -> a
+getValue (Single x) = x
+getValue (Multiple _ x) = x
+
+getCount :: Entry a -> Int
+getCount (Single x) = 1
+getCount (Multiple n _) = n
+
+myEncodeDirect :: (Eq a) => [a] -> [Entry a]
+myEncodeDirect xs = 
+    foldl 
+    (\acc x -> if length acc == 0 then 
+        [Single x]
+    else if getValue (last acc) == x then 
+        init acc ++ [Multiple ((getCount (last acc))+1) (getValue (last acc))]
+    else 
+        acc ++ [Single x]
+    ) [] xs
+
+
