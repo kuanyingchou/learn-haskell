@@ -115,4 +115,26 @@ myEncodeDirect xs =
         acc ++ [Single x]
     ) [] xs
 
+-- p14
+myDuplicate :: [a] -> [a]
+myDuplicate [] = []
+myDuplicate (x:xs) = x : x : myDuplicate xs
 
+-- p15
+myReplicate :: [a] -> Int -> [a]
+myReplicate [] _ = []
+myReplicate xs n = concat [replicate n x | x<-xs]
+
+-- p17
+myTake :: Int -> [a] -> [a]
+myTake n (x:xs)
+    | n > 0 = x : myTake (n-1) xs
+    | otherwise = []
+
+myDrop :: Int -> [a] -> [a]
+myDrop n all@(x:xs)
+    | n > 0 = myDrop (n-1) xs
+    | otherwise = all
+
+mySplit :: [a] -> Int -> [[a]]
+mySplit xs n = [myTake n xs, myDrop n xs]
