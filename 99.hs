@@ -125,6 +125,14 @@ myReplicate :: [a] -> Int -> [a]
 myReplicate [] _ = []
 myReplicate xs n = concat [replicate n x | x<-xs]
 
+-- p16
+myDropEvery :: [a] -> Int -> [a]
+myDropEvery xs n = concat $ zipWith drop xs (concat $ repeat [n, n-1..1])
+    where 
+    drop x n
+        | n == 1 = []
+        | otherwise = [x]
+
 -- p17
 myTake :: Int -> [a] -> [a]
 myTake n (x:xs)
@@ -138,3 +146,5 @@ myDrop n all@(x:xs)
 
 mySplit :: [a] -> Int -> [[a]]
 mySplit xs n = [myTake n xs, myDrop n xs]
+
+
