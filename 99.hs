@@ -147,4 +147,16 @@ myDrop n all@(x:xs)
 mySplit :: [a] -> Int -> [[a]]
 mySplit xs n = [myTake n xs, myDrop n xs]
 
+-- p18
+mySlice :: [a] -> Int -> Int -> [a]
+mySlice xs min max = 
+    [ snd x | x <- (zip [1..] xs), (fst x)>=min, (fst x)<=max ]
+
+-- p19
+myRotate :: [a] -> Int -> [a]
+myRotate xs n 
+    | n > 0 = snd (splitAt n xs)
+    | n < 0 = (snd negPair) ++ (fst negPair)
+    | otherwise = xs
+    where negPair = (splitAt ((length xs)+n) (xs))
 
