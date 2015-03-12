@@ -160,3 +160,9 @@ myRotate xs n
     | otherwise = xs
     where negPair = (splitAt ((length xs)+n) (xs))
 
+-- p20
+myRemoveAt :: [a] -> Int -> (a, [a])
+myRemoveAt xs n = (xs !! (n-1) , (fst pair) ++ tail (snd pair))
+    where pair = splitAt (n-1) xs
+
+
