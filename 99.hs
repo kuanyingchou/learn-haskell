@@ -1,4 +1,5 @@
 -- 99 questions from https://wiki.haskell.org/H-99:_Ninety-Nine_Haskell_Problems
+import System.Random
 
 last' :: [a] -> a
 last' [] = error "empty list"
@@ -164,5 +165,19 @@ myRotate xs n
 myRemoveAt :: [a] -> Int -> (a, [a])
 myRemoveAt xs n = (xs !! (n-1) , (fst pair) ++ tail (snd pair))
     where pair = splitAt (n-1) xs
+
+-- p21
+myInsertAt :: a -> [a] -> Int -> [a]
+myInsertAt x ys n = (pair !! 0) ++ [x] ++ (pair !! 1)
+    where pair = (mySplit ys (n-1))
+
+-- p22
+myRange :: Int -> Int -> [Int]
+myRange x y 
+    | x<=y = x : myRange (x+1) y
+    | otherwise = []
+
+-- p23
+
 
 
