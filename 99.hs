@@ -178,6 +178,28 @@ myRange x y
     | otherwise = []
 
 -- p23
+{--
+myRandBool :: IO Bool -- m Bool?
+myRandBool = do
+    gen <- newStdGen
+    let (r, g) = random gen :: (Bool, StdGen)
+    return r
+--}
 
+myRandomize :: [a] -> IO [a]
+myRandomize [] = do 
+    return []
+myRandomize xs = do
+    gen <- newStdGen
+    let len = length xs
+    let n = fst (randomR (1, len) gen :: (Int, StdGen))
+    let s = myRemoveAt xs n
+    rest <- (myRandomize (snd s))
+    return ((fst s) : rest)
 
+myRandSelect :: [a] -> Int -> IO [a]
+myRandSelect xs n = do
+    randomList <- myRandomize xs
+    return (take n randomList)
 
+--}
