@@ -202,4 +202,11 @@ myRandSelect xs n = do
     randomList <- myRandomize xs
     return (take n randomList)
 
---}
+-- p24
+myRandomSelect :: Int -> Int -> IO [Int]
+myRandomSelect n r = do
+    let list = [1..r]
+    myRandSelect list n
+
+
+
