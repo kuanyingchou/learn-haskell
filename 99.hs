@@ -186,16 +186,6 @@ myRandBool = do
     return r
 --}
 
-myRandomize :: [a] -> IO [a]
-myRandomize [] = do 
-    return []
-myRandomize xs = do
-    gen <- newStdGen
-    let len = length xs
-    let n = fst (randomR (1, len) gen :: (Int, StdGen))
-    let s = myRemoveAt xs n
-    rest <- (myRandomize (snd s))
-    return ((fst s) : rest)
 
 myRandSelect :: [a] -> Int -> IO [a]
 myRandSelect xs n = do
@@ -207,6 +197,33 @@ myRandomSelect :: Int -> Int -> IO [Int]
 myRandomSelect n r = do
     let list = [1..r]
     myRandSelect list n
+
+
+-- p25
+myRandomize :: [a] -> IO [a]
+myRandomize [] = do 
+    return []
+myRandomize xs = do
+    gen <- newStdGen
+    let len = length xs
+    let n = fst (randomR (1, len) gen :: (Int, StdGen))
+    let s = myRemoveAt xs n
+    rest <- (myRandomize (snd s))
+    return ((fst s) : rest)
+
+-- p26
+myRest :: (Eq a) => a -> [a] -> [a]
+myRest _ [] = []
+myRest x (y:ys)
+    | x == y = ys
+    | otherwise = myRest x ys
+
+myCombinations :: (Eq a) => Int -> [a] -> [[a]]
+myCombinations n xs
+    | n > 1 = concat ( map (\x -> [x:y | y <- (myCombinations (n-1) (myRest x xs))]) xs )
+    | n == 1 = [[x] | x <- xs]
+    | otherwise = []
+
 
 
 
