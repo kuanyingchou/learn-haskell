@@ -212,6 +212,7 @@ myRandomize xs = do
     return ((fst s) : rest)
 
 -- p26
+-- myRest 3 [1..5] = [3..5]
 myRest :: (Eq a) => a -> [a] -> [a]
 myRest _ [] = []
 myRest x (y:ys)
@@ -224,6 +225,16 @@ myCombinations n xs
     | n == 1 = [[x] | x <- xs]
     | otherwise = []
 
-
+-- p31
+isprime :: Int -> Bool
+isprime x
+    | x <= 1 = False
+    | divisable x [2..(x-1)] = False
+    | otherwise = True
+    where 
+      divisable x (y:ys)
+        | x `mod` y == 0 = True
+        | otherwise = divisable x ys
+      divisable x [] = False
 
 
