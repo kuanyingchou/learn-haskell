@@ -237,9 +237,34 @@ isprime x
         | otherwise = divisable x ys
       divisable x [] = False
 
+-- p32
 gcd' :: Int -> Int -> Int
 gcd' x y 
     | y == 0 = x
     | otherwise = gcd' y (x `mod` y) -- TODO: negative numbers
 
+-- p33
+coprime :: Int -> Int -> Bool
+coprime x y
+    | gcd' x y == 1 = True
+    | otherwise = False
 
+-- p34
+totient :: Int -> Int
+totient x
+    | x == 1 = 1
+    | otherwise = length $ filter (coprime x) [1..x-1]
+
+-- p35
+primeFactor :: Int -> [Int]
+primeFactor x
+    | x /= 1 = firstPrimeFactor : primeFactor (x `div` firstPrimeFactor)
+    | otherwise = []
+    where 
+    firstPrimeFactor = firstPrimeFactor' x (filter isprime [2..x-1])
+        where 
+        firstPrimeFactor' y [] = y
+        firstPrimeFactor' y (z:zs)
+            | mod y z == 0 = z
+            | otherwise = firstPrimeFactor' y zs
+        
